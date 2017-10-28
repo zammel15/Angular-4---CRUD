@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="col-md-12">
+        <h1>Product List</h1>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center">CIN</th>
+                    <th class="text-center">NOM</th>
+                    <th class="text-center">PRENOM</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products">
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price | currency:'USD':true:'1.0-2' }}</td>
+                    <td>
+                        <button class="btn btn-info" (click)="showEditProductForm(product)">
+            Edit
+          </button>
+                        <button class="btn btn-danger" (click)="removeProduct(product)">
+   delete
+          </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button class="btn btn-success" (click)="showAddProductForm()">Add</button>
+        <br />
+        <br />
+
+        <form *ngIf="productForm">
+            <h2>Add New Product</h2>
+            <p>CIN: <input type="text" name="id" [(ngModel)]="newProduct.id" /></p>
+            <p>NOM: <input type="text" name="name" [(ngModel)]="newProduct.name" /></p>
+            <p>Prenom: <input type="text" name="description" [(ngModel)]="newProduct.description" /></p>
+
+            <button type="button" class="btn btn-primary" (click)="saveProduct(newProduct)">Submit</button>
+            <button type="button" class="btn btn-primary" (click)="cancelNewProduct()">Cancel</button>
+
+        </form>
+
+        <form *ngIf="editProductForm">
+            <h2>Edit Product Details</h2>
+            <p>CIN: <input type="text" name="id" [(ngModel)]="editedProduct.id" /></p>
+            <p>NOM: <input type="text" name="name" [(ngModel)]="editedProduct.name" /></p>
+            <p>Prenom: <input type="text" name="description" [(ngModel)]="editedProduct.description" /></p>
+
+            <button type="button" class="btn btn-primary" (click)="updateProduct(editedProduct)">Submit</button>
+            <button type="button" class="btn btn-warning" (click)="cancelEdits()">Cancel</button>
+
+        </form>
+    </div>
+</div>
